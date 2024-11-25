@@ -10,7 +10,23 @@ class TodoRepositoryImp(
     private val todoRemoteDataSource: TodoRemoteDataSource
 ) : TodoRepository {
     override suspend fun fetchTodoList(): List<TodoModel> {
-        TODO("Not yet implemented")
+        val result = todoRemoteDataSource.getTodos()
+
+        result.fold(
+            onSuccess = { listOfTodoDts ->
+                return listOfTodoDts.map { todoDto ->
+                    TodoModel(
+                        id = todoDto.id,
+                        userId = todoDto.userId,
+                        title = todoDto.title,
+                        completed = todoDto.completed
+                    )
+                }
+            },
+            onFailure = { failure ->
+                throw failure
+            }
+        )
     }
 
     override suspend fun updateTodo(todoModel: TodoModel) {

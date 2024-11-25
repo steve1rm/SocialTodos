@@ -15,7 +15,7 @@ class TodoRemoteDataSourceImp(
     override suspend fun getTodos(): Result<List<TodoDto>> {
         try {
             val listOfTodos = httpClient.get(
-                urlString = ""
+                urlString = "https://jsonplaceholder.typicode.com/todos"
             ).body<List<TodoDto>>()
 
             return Result.success(listOfTodos)
@@ -23,7 +23,7 @@ class TodoRemoteDataSourceImp(
         catch (exception: Exception) {
             coroutineContext.ensureActive()
             exception.printStackTrace()
-            
+
             return Result.failure(exception)
         }
     }
