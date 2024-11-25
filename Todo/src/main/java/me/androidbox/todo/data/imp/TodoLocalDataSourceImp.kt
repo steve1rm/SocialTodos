@@ -1,5 +1,6 @@
 package me.androidbox.todo.data.imp
 
+import io.realm.kotlin.UpdatePolicy
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import me.androidbox.todo.data.RealmDbClient
@@ -22,14 +23,14 @@ class TodoLocalDataSourceImp(
     override suspend fun saveTodos(todoList: List<TodoEntity>) {
         return realmDbClient.realm.write {
             todoList.forEach { todoEntity ->
-                this.copyToRealm(todoEntity)
+                this.copyToRealm(todoEntity, UpdatePolicy.ALL)
             }
         }
     }
 
     override suspend fun updateTodo(todo: TodoEntity) {
         realmDbClient.realm.write {
-            val existingTodo = this.query(TodoEntity::class, "_id == $0", todo._id)
+            val existingTodo = this.query(TodoEntity::class, "id == $0", todo.id)
                 .first()
                 .find()
 
@@ -40,7 +41,7 @@ class TodoLocalDataSourceImp(
                 existingTodo.completed = todo.completed
             }
             else {
-                throw IllegalArgumentException("Todo [${todo.title}] with ID ${todo._id} does not exist")
+                throw IllegalArgumentException("Todo [${todo.title}] with ID ${todo.id} does not exist")
             }
         }
     }
