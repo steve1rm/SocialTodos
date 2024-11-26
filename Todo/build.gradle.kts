@@ -67,6 +67,8 @@ dependencies {
     implementation(libs.androidx.material3)
 
     testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
     testImplementation(libs.junit)
 
     androidTestImplementation(libs.androidx.junit)

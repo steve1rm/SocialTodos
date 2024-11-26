@@ -22,6 +22,7 @@ class TodoListViewModel(
     val todoListState = _todoListState.asStateFlow()
         .onStart {
             fetchLocalTodoItems()
+            println("fetchLocalTodoItems onStart")
         }
         .stateIn(
             scope = viewModelScope,
