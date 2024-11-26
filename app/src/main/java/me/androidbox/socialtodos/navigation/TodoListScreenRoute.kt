@@ -14,8 +14,9 @@ data object TodoListScreenRoute : Screen {
         val todoListViewModel = koinViewModel<TodoListViewModel>()
 
         val todoListState by todoListViewModel.todoListState.collectAsStateWithLifecycle()
-        println("TodoListScreenRoute ${todoListState.count()}")
 
-        TodoListScreen()
+        TodoListScreen(
+            todoModel = todoListState
+        )
     }
 }
