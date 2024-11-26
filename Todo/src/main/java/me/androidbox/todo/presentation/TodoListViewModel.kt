@@ -5,11 +5,12 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import me.androidbox.todo.data.datasource.TodoRemoteDataSource
 import me.androidbox.todo.domain.models.TodoModel
 import me.androidbox.todo.domain.usecases.FetchLocalTodoUseCase
 import me.androidbox.todo.domain.usecases.FetchRemoteTodoUseCase
@@ -25,7 +26,6 @@ class TodoListViewModel(
     val todoListState = _todoListState.asStateFlow()
         .onStart {
             fetchLocalTodoItems()
-            fetchRemoteTodoUseCase.execute()
             println("fetchLocalTodoItems onStart")
         }
         .stateIn(
@@ -37,7 +37,7 @@ class TodoListViewModel(
 
     fun fetchLocalTodoItems() {
         viewModelScope.launch {
-            try {
+            launch {
                 fetchLocalTodoUseCase.execute()
                     .collect { todoList ->
                         _todoListState.update {
@@ -45,9 +45,16 @@ class TodoListViewModel(
                         }
                     }
             }
-            catch (ex: Exception) {
-                ex.printStackTrace()
+
+            launch {
+                try {
+                    fetchRemoteTodoUseCase.execute()
+                }
+                catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
             }
         }
+
     }
 }

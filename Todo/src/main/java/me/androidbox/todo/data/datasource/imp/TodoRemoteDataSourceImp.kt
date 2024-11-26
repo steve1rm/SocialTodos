@@ -24,7 +24,7 @@ class TodoRemoteDataSourceImp(
             coroutineContext.ensureActive()
             exception.printStackTrace()
 
-            throw exception
+            return Result.failure(exception)
         }
     }
 }
