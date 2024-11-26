@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
+    testImplementation(libs.mockito.kotlin)
     testImplementation(libs.junit)
 
     androidTestImplementation(libs.androidx.junit)

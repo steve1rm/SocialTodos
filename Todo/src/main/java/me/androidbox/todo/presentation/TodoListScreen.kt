@@ -24,6 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import me.androidbox.todo.domain.models.TodoModel
 
@@ -115,4 +117,23 @@ fun TodoItemPreview() {
     )
 
     TodoItem(todoModel = todoModel, modifier = Modifier)
+}
+class SampleTodoModelProvider : PreviewParameterProvider<List<TodoModel>> {
+    override val values: Sequence<List<TodoModel>>
+        get() = sequenceOf(
+            listOf(
+                TodoModel(1, 6, "Task 1", false),
+                TodoModel(2, 6, "Task 2", true),
+                TodoModel(3, 6, "Task 3", false),
+                TodoModel(4, 6, "Task 4", true)
+            ),
+            emptyList()
+        )
+}
+@Preview
+@Composable
+fun TodoListScreenPreview(
+    @PreviewParameter(SampleTodoModelProvider::class) todoModel: List<TodoModel>
+) {
+    TodoListScreen(todoModel = todoModel)
 }

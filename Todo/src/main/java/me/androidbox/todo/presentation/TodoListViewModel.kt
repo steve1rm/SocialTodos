@@ -36,7 +36,6 @@ class TodoListViewModel(
                 fetchLocalTodoUseCase.execute()
                     .collect { todoList ->
                         _todoListState.update {
-                            println("TodoListViewModel ${it.count()}")
                             todoList
                         }
                     }
