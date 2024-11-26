@@ -33,7 +33,9 @@ fun TodoListScreen(
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
-        modifier = modifier.fillMaxSize().padding(horizontal = 8.dp),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = 8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(
@@ -63,7 +65,9 @@ fun TodoItem(
         shape = RoundedCornerShape(8.dp)
     ) {
         Column(
-            modifier = modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
