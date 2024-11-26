@@ -5,8 +5,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -14,12 +12,10 @@ import kotlinx.coroutines.launch
 import me.androidbox.todo.domain.models.TodoModel
 import me.androidbox.todo.domain.usecases.FetchLocalTodoUseCase
 import me.androidbox.todo.domain.usecases.FetchRemoteTodoUseCase
-import me.androidbox.todo.domain.usecases.UpdataTodoUseCase
 
 class TodoListViewModel(
     private val fetchLocalTodoUseCase: FetchLocalTodoUseCase,
-    private val fetchRemoteTodoUseCase: FetchRemoteTodoUseCase,
-    private val updataTodoUseCase: UpdataTodoUseCase
+    private val fetchRemoteTodoUseCase: FetchRemoteTodoUseCase
 ) : ViewModel() {
 
     private val _todoListState = MutableStateFlow(emptyList<TodoModel>())
