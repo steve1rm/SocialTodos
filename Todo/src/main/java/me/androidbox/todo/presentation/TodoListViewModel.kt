@@ -7,11 +7,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import me.androidbox.todo.domain.models.TodoModel
-import me.androidbox.todo.domain.usecases.FetchTodoUseCase
+import me.androidbox.todo.domain.usecases.FetchLocalTodoUseCase
 import me.androidbox.todo.domain.usecases.UpdataTodoUseCase
 
 class TodoListViewModel(
-    private val fetchTodoUseCase: FetchTodoUseCase,
+    private val fetchLocalTodoUseCase: FetchLocalTodoUseCase,
     private val updataTodoUseCase: UpdataTodoUseCase
 ) : ViewModel() {
 
@@ -21,7 +21,7 @@ class TodoListViewModel(
     init {
         viewModelScope.launch {
             try {
-                fetchTodoUseCase.execute()
+                fetchLocalTodoUseCase.execute()
                     .collect { todoList ->
                         _todoListState.update {
                             println("TodoListViewModel ${it.count()}")

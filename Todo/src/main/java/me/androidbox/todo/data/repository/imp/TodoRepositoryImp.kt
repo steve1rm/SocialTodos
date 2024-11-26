@@ -5,14 +5,14 @@ import kotlinx.coroutines.flow.map
 import me.androidbox.todo.data.TodoLocalDataSource
 import me.androidbox.todo.data.TodoRemoteDataSource
 import me.androidbox.todo.data.entities.TodoEntity
-import me.androidbox.todo.domain.repository.TodoRepository
 import me.androidbox.todo.domain.models.TodoModel
+import me.androidbox.todo.domain.repository.TodoRepository
 
 class TodoRepositoryImp(
     private val todoLocalDataSource: TodoLocalDataSource,
     private val todoRemoteDataSource: TodoRemoteDataSource
 ) : TodoRepository {
-    override suspend fun fetchTodoList(): Flow<List<TodoModel>> {
+    override suspend fun fetchRemoteTodoList() {
         val result = todoRemoteDataSource.getTodos()
 
         result.fold(
@@ -29,23 +29,25 @@ class TodoRepositoryImp(
 
                 /** Insertion into Realm as the source of truth */
                 todoLocalDataSource.saveTodos(todoEntities)
-
-                /** Fetch from realm after insertion and uses a simple mapper to return the TodoModel */
-                return todoLocalDataSource.getTodos().map { listTodoEntity ->
-                    listTodoEntity.map { entity ->
-                        TodoModel(
-                            id = entity.id,
-                            userId = entity.userId,
-                            title = entity.title,
-                            completed = entity.completed
-                        )
-                    }
-                }
             },
-            onFailure = { failure ->
-                throw failure
+            onFailure = { exception ->
+                throw exception
             }
         )
+    }
+
+    override fun fetchLocalTodoList(): Flow<List<TodoModel>> {
+        return todoLocalDataSource.getTodos()
+            .map { listTodoEntity ->
+                listTodoEntity.map { entity ->
+                    TodoModel(
+                        id = entity.id,
+                        userId = entity.userId,
+                        title = entity.title,
+                        completed = entity.completed
+                    )
+                }
+            }
     }
 
     override suspend fun updateTodo(todoModel: TodoModel) {

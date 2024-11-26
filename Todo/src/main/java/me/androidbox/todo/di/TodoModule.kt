@@ -10,9 +10,11 @@ import me.androidbox.todo.data.imp.TodoLocalDataSourceImp
 import me.androidbox.todo.data.imp.TodoRemoteDataSourceImp
 import me.androidbox.todo.data.repository.imp.TodoRepositoryImp
 import me.androidbox.todo.domain.repository.TodoRepository
+import me.androidbox.todo.domain.usecases.FetchLocalTodoUseCase
 import me.androidbox.todo.domain.usecases.FetchTodoUseCase
 import me.androidbox.todo.domain.usecases.UpdataTodoUseCase
-import me.androidbox.todo.domain.usecases.imp.FetchTodoUseCaseImp
+import me.androidbox.todo.domain.usecases.imp.FetchLocalTodoUseCaseImp
+import me.androidbox.todo.domain.usecases.imp.FetchRemoteTodoUseCaseImp
 import me.androidbox.todo.domain.usecases.imp.UpdateTodoUseCaseImp
 import me.androidbox.todo.presentation.TodoListViewModel
 import org.koin.core.module.dsl.factoryOf
@@ -45,9 +47,10 @@ val todoModule = module {
     }
 
     factory<FetchTodoUseCase> {
-        FetchTodoUseCaseImp(get<TodoRepository>())
+        FetchRemoteTodoUseCaseImp(get<TodoRepository>())
     }
     factoryOf(::UpdateTodoUseCaseImp).bind(UpdataTodoUseCase::class)
+    factoryOf(::FetchLocalTodoUseCaseImp).bind(FetchLocalTodoUseCase::class)
 
     viewModelOf(::TodoListViewModel)
 }
