@@ -1,10 +1,10 @@
-package me.androidbox.todo.data.imp
+package me.androidbox.todo.data.datasource.imp
 
 import io.realm.kotlin.UpdatePolicy
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import me.androidbox.todo.data.RealmDbClient
-import me.androidbox.todo.data.TodoLocalDataSource
+import me.androidbox.todo.data.datasource.TodoLocalDataSource
 import me.androidbox.todo.data.entities.TodoEntity
 
 class TodoLocalDataSourceImp(

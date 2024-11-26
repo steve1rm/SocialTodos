@@ -1,10 +1,10 @@
-package me.androidbox.todo.data.imp
+package me.androidbox.todo.data.datasource.imp
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import kotlinx.coroutines.ensureActive
-import me.androidbox.todo.data.TodoRemoteDataSource
+import me.androidbox.todo.data.datasource.TodoRemoteDataSource
 import me.androidbox.todo.data.dto.TodoDto
 import kotlin.coroutines.coroutineContext
 
@@ -24,7 +24,7 @@ class TodoRemoteDataSourceImp(
             coroutineContext.ensureActive()
             exception.printStackTrace()
 
-            return Result.failure(exception)
+            throw exception
         }
     }
 }

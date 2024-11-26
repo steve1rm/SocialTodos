@@ -2,8 +2,8 @@ package me.androidbox.todo.data.repository.imp
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import me.androidbox.todo.data.TodoLocalDataSource
-import me.androidbox.todo.data.TodoRemoteDataSource
+import me.androidbox.todo.data.datasource.TodoLocalDataSource
+import me.androidbox.todo.data.datasource.TodoRemoteDataSource
 import me.androidbox.todo.data.entities.TodoEntity
 import me.androidbox.todo.domain.models.TodoModel
 import me.androidbox.todo.domain.repository.TodoRepository

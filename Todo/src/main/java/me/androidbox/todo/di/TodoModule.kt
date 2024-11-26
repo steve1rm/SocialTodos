@@ -4,14 +4,14 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import me.androidbox.todo.data.HttpClientFactory
 import me.androidbox.todo.data.RealmDbClient
-import me.androidbox.todo.data.TodoLocalDataSource
-import me.androidbox.todo.data.TodoRemoteDataSource
-import me.androidbox.todo.data.imp.TodoLocalDataSourceImp
-import me.androidbox.todo.data.imp.TodoRemoteDataSourceImp
+import me.androidbox.todo.data.datasource.TodoLocalDataSource
+import me.androidbox.todo.data.datasource.TodoRemoteDataSource
+import me.androidbox.todo.data.datasource.imp.TodoLocalDataSourceImp
+import me.androidbox.todo.data.datasource.imp.TodoRemoteDataSourceImp
 import me.androidbox.todo.data.repository.imp.TodoRepositoryImp
 import me.androidbox.todo.domain.repository.TodoRepository
 import me.androidbox.todo.domain.usecases.FetchLocalTodoUseCase
-import me.androidbox.todo.domain.usecases.FetchTodoUseCase
+import me.androidbox.todo.domain.usecases.FetchRemoteTodoUseCase
 import me.androidbox.todo.domain.usecases.UpdataTodoUseCase
 import me.androidbox.todo.domain.usecases.imp.FetchLocalTodoUseCaseImp
 import me.androidbox.todo.domain.usecases.imp.FetchRemoteTodoUseCaseImp
@@ -46,7 +46,7 @@ val todoModule = module {
         )
     }
 
-    factory<FetchTodoUseCase> {
+    factory<FetchRemoteTodoUseCase> {
         FetchRemoteTodoUseCaseImp(get<TodoRepository>())
     }
     factoryOf(::UpdateTodoUseCaseImp).bind(UpdataTodoUseCase::class)

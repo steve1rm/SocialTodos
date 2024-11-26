@@ -9,12 +9,15 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import me.androidbox.todo.data.datasource.TodoRemoteDataSource
 import me.androidbox.todo.domain.models.TodoModel
 import me.androidbox.todo.domain.usecases.FetchLocalTodoUseCase
+import me.androidbox.todo.domain.usecases.FetchRemoteTodoUseCase
 import me.androidbox.todo.domain.usecases.UpdataTodoUseCase
 
 class TodoListViewModel(
     private val fetchLocalTodoUseCase: FetchLocalTodoUseCase,
+    private val fetchRemoteTodoUseCase: FetchRemoteTodoUseCase,
     private val updataTodoUseCase: UpdataTodoUseCase
 ) : ViewModel() {
 
@@ -22,6 +25,7 @@ class TodoListViewModel(
     val todoListState = _todoListState.asStateFlow()
         .onStart {
             fetchLocalTodoItems()
+            fetchRemoteTodoUseCase.execute()
             println("fetchLocalTodoItems onStart")
         }
         .stateIn(

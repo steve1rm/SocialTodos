@@ -1,5 +1,5 @@
 package me.androidbox.todo.domain.usecases
 
-fun interface FetchTodoUseCase {
+fun interface FetchRemoteTodoUseCase {
     suspend fun execute()
 }

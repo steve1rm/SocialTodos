@@ -1,4 +1,4 @@
-package me.androidbox.todo.data
+package me.androidbox.todo.data.datasource
 
 import kotlinx.coroutines.flow.Flow
 import me.androidbox.todo.data.entities.TodoEntity
