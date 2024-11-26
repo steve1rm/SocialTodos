@@ -22,14 +22,12 @@ class TodoListViewModel(
     val todoListState = _todoListState.asStateFlow()
         .onStart {
             fetchLocalTodoItems()
-            println("fetchLocalTodoItems onStart")
         }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = emptyList()
         )
-
 
     fun fetchLocalTodoItems() {
         viewModelScope.launch {
