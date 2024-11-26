@@ -8,7 +8,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import me.androidbox.todo.domain.models.TodoModel
@@ -36,8 +35,7 @@ class TodoListViewModelTest {
         Dispatchers.setMain(UnconfinedTestDispatcher())
         todoListViewModel = TodoListViewModel(
             fetchLocalTodoUseCase = fetchLocalTodoUseCase,
-            fetchRemoteTodoUseCase = fetchRemoteTodoUseCase,
-            updataTodoUseCase = updateTodoUseCase)
+            fetchRemoteTodoUseCase = fetchRemoteTodoUseCase)
     }
 
     @Test
@@ -67,7 +65,6 @@ class TodoListViewModelTest {
 
         // Act
         todoListViewModel.fetchLocalTodoItems()
-        advanceUntilIdle()
 
         // Assert
         todoListViewModel.todoListState.test {
