@@ -13,7 +13,6 @@ import kotlinx.coroutines.test.setMain
 import me.androidbox.todo.domain.models.TodoModel
 import me.androidbox.todo.domain.usecases.FetchLocalTodoUseCase
 import me.androidbox.todo.domain.usecases.FetchRemoteTodoUseCase
-import me.androidbox.todo.domain.usecases.UpdataTodoUseCase
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.atLeast
@@ -26,7 +25,6 @@ import kotlin.random.Random
 class TodoListViewModelTest {
     private val fetchLocalTodoUseCase = mock<FetchLocalTodoUseCase>()
     private val fetchRemoteTodoUseCase = mock<FetchRemoteTodoUseCase>()
-    private val updateTodoUseCase = mock<UpdataTodoUseCase>()
 
     private lateinit var todoListViewModel: TodoListViewModel
 

@@ -17,11 +17,17 @@ class TodoListViewModel(
     private val fetchLocalTodoUseCase: FetchLocalTodoUseCase,
     private val fetchRemoteTodoUseCase: FetchRemoteTodoUseCase
 ) : ViewModel() {
+    private var hasFetchedLocalTodos: Boolean = false
 
     private val _todoListState = MutableStateFlow(emptyList<TodoModel>())
     val todoListState = _todoListState.asStateFlow()
         .onStart {
-            fetchLocalTodoItems()
+            if(!hasFetchedLocalTodos) {
+                fetchLocalTodoItems()
+                hasFetchedLocalTodos = true
+                println("hasFetchedLocalTodo onStart")
+            }
+            println("hasFetchedLocalTodo")
         }
         .stateIn(
             scope = viewModelScope,
@@ -49,6 +55,5 @@ class TodoListViewModel(
                 }
             }
         }
-
     }
 }
