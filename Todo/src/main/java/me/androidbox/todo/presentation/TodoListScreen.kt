@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -79,6 +80,7 @@ fun TodoItem(
                 Text(text = "User ID: ${todoModel.userId}")
 
                 Switch(
+                    modifier = Modifier.testTag("switch_${todoModel.id}"),
                     checked = todoModel.completed,
                     onCheckedChange = { isCompleted ->
                         /** Update local DB */
@@ -97,6 +99,7 @@ fun TodoItem(
                     overflow = TextOverflow.Ellipsis)
 
                 Icon(
+                    modifier = Modifier.testTag("icon_${todoModel.id}"),
                     imageVector = if (todoModel.completed) Icons.Default.Done else Icons.Default.Close,
                     contentDescription = null,
                     tint = if (todoModel.completed) Color.Green else Color.Red
@@ -118,6 +121,7 @@ fun TodoItemPreview() {
 
     TodoItem(todoModel = todoModel, modifier = Modifier)
 }
+
 class SampleTodoModelProvider : PreviewParameterProvider<List<TodoModel>> {
     override val values: Sequence<List<TodoModel>>
         get() = sequenceOf(

@@ -18,6 +18,8 @@ coroutines = "1.9.0"
 appcompat = "1.7.0"
 material = "1.12.0"
 turbine = "0.12.1"
+uiTestJunit4 = "1.7.5"
+uiTestManifest = "1.7.5"
 voyager = "1.0.0"
 
 [libraries]
@@ -58,6 +60,8 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "uiTestJunit4" }
+ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "uiTestManifest" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
 
