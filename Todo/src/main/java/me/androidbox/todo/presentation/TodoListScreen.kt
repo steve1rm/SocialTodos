@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import me.androidbox.todo.domain.models.TodoModel
 
 @Composable
@@ -77,7 +78,9 @@ fun TodoItem(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "User ID: ${todoModel.userId}")
+                Text(
+                    text = "User ID: ${todoModel.userId}",
+                    fontSize = 16.sp)
 
                 Switch(
                     modifier = Modifier.testTag("switch_${todoModel.id}"),
@@ -96,6 +99,7 @@ fun TodoItem(
                     modifier = Modifier.weight(1f),
                     text = "Title: ${todoModel.title}",
                     maxLines = 1,
+                    fontSize = 18.sp,
                     overflow = TextOverflow.Ellipsis)
 
                 Icon(
