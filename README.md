@@ -16,6 +16,7 @@ Offline first simple todo app that displays a list of todo status items for offl
 - [x] Realm
 - [x] Android unit tests
 - [x] Unit tests
+- [X] Koin DI
 - [x] MVVM
 - [x] Feature module
 
